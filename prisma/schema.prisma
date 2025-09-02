@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model School {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.Text
+  address   String   @db.Text
+  city      String   @db.VarChar(191)
+  state     String   @db.VarChar(191)
+  contact   String   @db.VarChar(32)
+  image     String?  @db.Text
+  email_id  String   @db.VarChar(191)
+  createdAt DateTime @default(now())
+
+  @@index([city])
+  @@index([state])
+}
