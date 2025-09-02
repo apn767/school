@@ -2,6 +2,8 @@ import { prisma } from "@/lib/db";
 import { schoolSchema } from "@/lib/validators";
 import { Prisma } from "@prisma/client";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const q = searchParams.get("q") || "";
