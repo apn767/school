@@ -3,7 +3,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { schoolSchema, type SchoolInput } from "@/lib/validators";
 import { useState } from "react";
-import { Input, Textarea, Button, Select } from "./Ui";
+import { Input, Textarea, Button } from "./Ui";
+import Image from "next/image";
 
 export default function SchoolForm() {
   const {
@@ -149,9 +150,11 @@ export default function SchoolForm() {
           }}
         >
           {preview ? (
-            <img
+            <Image
               src={preview}
               alt="preview"
+              width={320}
+              height={160}
               className="mx-auto h-40 object-cover rounded-xl"
             />
           ) : (

@@ -32,7 +32,14 @@ export async function POST(req: NextRequest) {
 
     const publicPath = `/schoolImages/${filename}`;
     return Response.json({ path: publicPath });
-  } catch (e: any) {
-    return new Response(JSON.stringify({ error: e.message }), { status: 500 });
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      return new Response(JSON.stringify({ error: e.message }), {
+        status: 500,
+      });
+    }
+    return new Response(JSON.stringify({ error: "Unknown error" }), {
+      status: 500,
+    });
   }
 }

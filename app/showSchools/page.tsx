@@ -1,10 +1,10 @@
 import { prisma } from "@/lib/db";
 import SchoolCard from "@/components/SchoolCard";
 import { Input } from "@/components/Ui";
-import type { School } from "@prisma/client";
+import type { Prisma, School } from "@prisma/client";
 
 async function getSchools(query: string, state: string): Promise<School[]> {
-  const where: any = {};
+  const where: Prisma.SchoolWhereInput = {};
   if (query) {
     where.OR = [{ name: { contains: query } }, { city: { contains: query } }];
   }

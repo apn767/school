@@ -1,12 +1,13 @@
 import { prisma } from "@/lib/db";
 import { schoolSchema } from "@/lib/validators";
+import { Prisma } from "@prisma/client";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const q = searchParams.get("q") || "";
   const state = searchParams.get("state") || "";
   const sort = searchParams.get("sort") || "new";
-  const where: any = {};
+  const where: Prisma.SchoolWhereInput = {};
   if (q) {
     where.OR = [{ name: { contains: q } }, { city: { contains: q } }];
   }

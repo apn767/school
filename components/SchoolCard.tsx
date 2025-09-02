@@ -7,7 +7,6 @@ export type SchoolCardProps = {
   image?: string | null;
 };
 export default function SchoolCard({
-  id,
   name,
   city,
   address,
