@@ -31,9 +31,13 @@ export async function POST(req: Request) {
     const parsed = schoolSchema.parse(body);
     const created = await prisma.school.create({ data: parsed });
     return Response.json({ ok: true, id: created.id });
-  } catch (e: any) {
-    console.error("POST /schools error:", e);
-    return new Response(JSON.stringify({ ok: false, error: e.message }), {
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      return new Response(JSON.stringify({ ok: false, error: e.message }), {
+        status: 400,
+      });
+    }
+    return new Response(JSON.stringify({ ok: false, error: "Unknown error" }), {
       status: 400,
     });
   }
